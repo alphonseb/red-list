@@ -5,9 +5,55 @@
 
     // SORT BY Value
     $sortBy = 'LC';
+
+    if (!empty($_POST['speciesLeft'])) {
+        $species = json_decode($_POST['speciesLeft']);
+        // echo '<pre>';
+        // print_r($species);
+        // echo '</pre>';
+        $selectedSpeciesArray = selectRandomSpiecies((array) $species, 6);
+        foreach ($selectedSpeciesArray['newArray'] as $key => $value) {
+            // Make URL
+            $speciesInfosUrl='https://apiv3.iucnredlist.org/api/v3/species/'.$value['names'].'?token='.token;
+            // Make Request
+            $speciesInfosArray = ApiRequest($speciesInfosUrl, 604800);
+            // Add Infos to general Array
+            foreach ($speciesInfosArray->result[0] as $keySpecies => $value) {
+                $selectedSpeciesArray['newArray'][$key][$keySpecies] = $value;
+            }
+        }
+        $selectedSpeciesArray['newArray'] = addUrlImage($selectedSpeciesArray['newArray']);
+        ?>
+        <?php include('./views/partials/specy_tile.php'); ?>
+        <?php
+        echo "===SEPARATOR===";
+        die(json_encode($selectedSpeciesArray));
+    }
+
+
     // Change Sort if $_POST from the form on the page
     if (!empty($_POST['cat'])) {
         $sortBy = $_POST['cat'];
+        $array = json_decode($_POST['current_array']);
+        $array = (array) $array;
+
+        $selectedSpeciesArray = selectRandomSpiecies((array)$array[$sortBy],6);
+        foreach ($selectedSpeciesArray['newArray'] as $key => $value) {
+            // Make URL
+            $speciesInfosUrl='https://apiv3.iucnredlist.org/api/v3/species/'.$value['names'].'?token='.token;
+            // Make Request
+            $speciesInfosArray = ApiRequest($speciesInfosUrl, 604800);
+            // Add Infos to general Array
+            foreach ($speciesInfosArray->result[0] as $keySpecies => $value) {
+                $selectedSpeciesArray['newArray'][$key][$keySpecies] = $value;
+            }
+        }
+        $selectedSpeciesArray['newArray'] = addUrlImage($selectedSpeciesArray['newArray']);
+        ?>
+        <?php include('./views/partials/specy_tile.php'); ?>
+        <?php
+        echo "===SEPARATOR===";
+        die(json_encode($selectedSpeciesArray));
     }
 
     // Get all URL

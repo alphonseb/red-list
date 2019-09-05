@@ -95,13 +95,23 @@ $species = $selectedSpeciesArray['newArray'];
                     </div>
                 </a>
             <?php endforeach; ?>
-            <button class="js-load-more load-more">Load more</button>
+            <p class="empty-cat <?= count($species) != 0 ? 'hidden' : '' ?>">No species found !</p>
+            <?php if ($selectedSpeciesArray['oldArray']['count'] > 0): ?>
+                <div class="full-loader">
+                    <div class="loader-container">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+                            <circle cx="25" cy="25" r="20" />
+                        </svg>
+                    </div>
+                    <button class="js-load-more load-more">Load more</button>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>
 <script>
     const count = <?= json_encode($categoryCountArray['category']) ?>;
-    const selectedSpecies = <?= json_encode($selectedSpeciesArray) ?>;
+    let selectedSpecies = <?= json_encode($selectedSpeciesArray) ?>;
 </script>
 <script src="https://d3js.org/d3.v5.min.js"></script>
 <?php include './views/partials/footer.php'; ?>
