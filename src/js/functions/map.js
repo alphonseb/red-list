@@ -1,6 +1,7 @@
 function map () {
     
     const $mapSvg = document.querySelector('.map-container .js-world-svg');
+    const $mapSvgGroup = document.querySelector('.map-container .js-world-svg .js-world-move');
     
     const windowSizes = {
         width: window.innerWidth,
@@ -13,6 +14,26 @@ function map () {
     })
     
     if ($mapSvg) {
+        $mapSvg.setAttribute('viewBox', `0 0 ${ windowSizes.width / 4 } ${ windowSizes.height / 4 }`)
+        const svgGroupBbox = $mapSvgGroup.getBBox();
+
+        window.addEventListener('resize', () => {
+            $mapSvg.setAttribute('viewBox', `0 0 ${ windowSizes.width / 4 } ${ windowSizes.height / 4 }`)
+        })
+
+
+        const limits = {
+            top: 10,
+            left: 10,
+            bottom: windowSizes.height / 4 - svgGroupBbox.height,
+            right: windowSizes.width / 4 - svgGroupBbox.width
+        }
+
+        const mouseCurrent = {
+            x: 0,
+            y: 0
+        }
+
         const mouseDown = {
             x: 0,
             y: 0
@@ -22,11 +43,16 @@ function map () {
             x: 0,
             y: 0
         }
-    
-        const pos = {
-            x: 0,
-            y: 0
+
+        const total = {
+            x: -300 / 1000,
+            y: -250 / 1000
         }
+
+        TweenMax.set($mapSvgGroup, {
+            x: total.x * 1000,
+            y: total.y * 1000
+        })
     
         const $description = document.querySelector('.map-container .country-description')
     
@@ -34,62 +60,78 @@ function map () {
     
         window.addEventListener('mousedown', (_event) => {
             isDown = true
-            mouseDown.x = _event.clientX,
-                mouseDown.y = _event.clientY
-    
-            // console.log(mouse, isDown);
-    
+            mouseDown.x = _event.clientX / windowSizes.width - 0.5
+            mouseDown.y = _event.clientY / windowSizes.height - 0.5
+        })
+        window.addEventListener('touchstart', (_event) => {
+            isDown = true
+            mouseDown.x = _event.touches[0].clientX / windowSizes.width - 0.5
+            mouseDown.y = _event.touches[0].clientY / windowSizes.height - 0.5
+            mouseCursor.x = _event.touches[0].clientX / windowSizes.width - 0.5
+            mouseCursor.y = _event.touches[0].clientY / windowSizes.height - 0.5
+
+            console.log(mouseDown, mouseCursor);
+            
         })
     
-        window.addEventListener('mouseup', () => {
+        window.addEventListener('mouseup', (_event) => {
             isDown = false
+            // mouseCurrent.x = _event.clientX / windowSizes.width - 0.5
+            // mouseCurrent.y = _event.clientY / windowSizes.width - 0.5
+            const movedX = mouseCursor.x - mouseDown.x
+            const movedY = mouseCursor.y - mouseDown.y
+            total.x += movedX
+            total.y += movedY
+            
+            let slideX = (total.x + movedX * 0.1) * 1000
+            if (slideX > limits.left) {
+                slideX = limits.left
+            } else if (slideX < limits.right) {
+                slideX = limits.right
+            }
+
+            let slideY = (total.y + movedY * 0.1) * 1000
+            if (slideY > limits.top) {
+                slideY = limits.top
+            } else if (slideY < limits.bottom) {
+                slideY = limits.bottom
+            }
+            
+
+            TweenMax.to($mapSvgGroup, 1.5, {
+                x: slideX,
+                y: slideY,
+                ease: Power2.easeOut
+            })
+        })
+        window.addEventListener('touchend', (_event) => {
+            isDown = false
+            console.log(_event);
+            const movedX = mouseCursor.x - mouseDown.x
+            const movedY = mouseCursor.y - mouseDown.y
+            total.x += movedX
+            total.y += movedY
+
+
+            TweenMax.to($mapSvgGroup, 0.5, {
+                x: (total.x + movedX * 0.1) * 1000,
+                y: (total.y + movedY * 0.1) * 1000
+            })
         })
     
         window.addEventListener('mousemove', (_event) => {
-    
-            // if (_event.clientX < mouseCursor.x) {
-            //     pos.x -= (_event.clientX - mouseDown.x) / windowSizes.width
-            // }
-            // else {
-            //     pos.x += (_event.clientX - mouseDown.x) / windowSizes.width
-            // }
-            // if (_event.clientY < mouseCursor.y) {
-            //     pos.y = $mapSvg.getBoundingClientRect().top + ((_event.clientY - mouseDown.y) / windowSizes.height)*100
-            // }
-            // else {
-            //     pos.y = $mapSvg.getBoundingClientRect().top - ((_event.clientY - mouseDown.y) / windowSizes.height)*100
-            // }
-            
+            mouseCursor.x = _event.clientX / windowSizes.width - 0.5
+            mouseCursor.y = _event.clientY / windowSizes.height - 0.5
+
             $description.style.left = `${_event.clientX + 5}px`
             $description.style.top = `${_event.clientY + 5}px`
-    
-    
-            pos.x = (_event.clientX - mouseDown.x) / windowSizes.width
-            pos.y = (_event.clientY - mouseDown.y) / windowSizes.height
-    
-    
-    
-            if (isDown) {
-                let top = $mapSvg.getBoundingClientRect().top + pos.y * 100
-                let left = $mapSvg.getBoundingClientRect().left + pos.x * 100
-                if (top > 60) {
-                    top = 60
-                }
-                else if (top < -windowSizes.height - 500) {
-                    top = -windowSizes.height - 500
-                }
-                if (left > 34) {
-                    left = 34
-                }
-                else if (left < -windowSizes.width) {
-                    left = -windowSizes.width
-                }
-    
-                $mapSvg.style.top = `${ top }px`
-                $mapSvg.style.left = `${ left }px`
-            }
-            mouseCursor.x = _event.clientX
-            mouseCursor.y = _event.clientY
+        })
+        window.addEventListener('touchmove', (_event) => {
+            mouseCursor.x = _event.touches[0].clientX / windowSizes.width - 0.5
+            mouseCursor.y = _event.touches[0].clientY / windowSizes.height - 0.5
+
+            $description.style.left = `${_event.touches[0].clientX + 5}px`
+            $description.style.top = `${_event.touches[0].clientY + 5}px`
         })
     
         const $paths = $mapSvg.querySelectorAll('path');
@@ -143,9 +185,44 @@ function map () {
             // const newPath = _$path.cloneNode();
     
             $link.appendChild(_$path)
-            $mapSvg.appendChild($link)
+            $mapSvgGroup.appendChild($link)
             _$path.style.fill = fill;
         }
+
+        const animate = () => {
+            window.requestAnimationFrame(animate)
+
+            // TweenMax.set($mapSvgGroup, {
+            //     x: -1008,
+            //     y: -650
+            // })
+
+            if (isDown) {
+                let setX = (total.x + (mouseCursor.x - mouseDown.x)) * 1000;
+
+                if (setX > limits.left) {
+                    setX = limits.left
+                } else if (setX < limits.right) {
+                    setX = limits.right
+                }
+                
+                let setY = (total.y + (mouseCursor.y - mouseDown.y)) * 1000;
+                if (setY > limits.top) {
+                    setY = limits.top
+                } else if (setY < limits.bottom) {
+                    setY = limits.bottom
+                }
+
+
+                TweenMax.set($mapSvgGroup, {
+                    x: setX,
+                    y: setY
+                })
+            }
+
+        }
+
+        animate()
     }
 }
 
