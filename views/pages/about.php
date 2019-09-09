@@ -24,7 +24,7 @@
             <img src="<?= URL ?>dist/img/elephant.png" alt="elephant">
             <div class="text">
                 <div class="title">
-                    <h2>Who are we ?</h2>
+                    <h2>Who are we?</h2>
                     <img src="<?= URL ?>dist/img/paw.png" alt="logo">
                 </div>
                 <p>We are a group of web students committed to this animal cause: our goal is to raise awareness among as many people as possible in order to preserve Nature.</p>

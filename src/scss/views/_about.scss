@@ -1,6 +1,10 @@
-header.nav img, .article .title img{
+.article .title img{
     width:5%;
     height:3%;
+}
+
+header.nav img {
+    width: 40px;
 }
 
 
@@ -19,7 +23,6 @@ header.nav{
     
     .naviguation ul{
         display:flex;
-        justify-content: space-between;
         align-items: center;
         padding:0px;
         margin: 0;
@@ -28,24 +31,26 @@ header.nav{
     
     .naviguation ul li{
         list-style: none;
-        padding-right:40px;
     }
     
     ul li:first-child{
         display:flex;
         align-items: center;
         color:#D72C26;
-        cursor: pointer;
         a:hover{
             text-decoration: none;
         }
+    }
+
+    ul li:nth-child(2) {
+        margin-right: 20px;
+        margin-left: auto;
     }
     
     
     ul li:nth-child(2), ul li:nth-child(3){
         display:flex;
         color:#C5BFBF;
-        cursor:pointer;
     }
     
     .naviguation ul li:last-child{
@@ -95,9 +100,9 @@ header.nav{
     }
     
     .article > img{
-        width:20%;
-        height:20%;
-        margin:20px;
+        width: 15%;
+        min-width: 250px;
+        margin: 0 50px;
     
     }
     
@@ -121,6 +126,7 @@ header.nav{
         margin-top:15rem;
         a{
             width: 30vw;
+            min-width: 250px;
             svg{
                 width: 100%;
                 path{
@@ -177,7 +183,6 @@ header.nav{
     
         .naviguation ul li{
             list-style: none;
-            padding:10px;
         }    
     
     
@@ -231,5 +236,32 @@ header.nav{
             transform: rotate(90deg);
         }
         
+    }
+
+
+
+    @media screen and (max-width: 800px) {
+        .article:nth-child(odd) {
+            flex-direction: column;
+        }
+        .article:nth-child(even) {
+            flex-direction: column-reverse;
+        }
+
+        .article {
+            .text {
+                width: 100%;
+                margin-bottom: 30px;
+
+                h2 {
+                    margin: 0;
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 500px) {
+        padding-left: 16px;
+        padding-right: 16px;
     }
 }
