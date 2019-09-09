@@ -3,8 +3,11 @@ function load_more () {
     const $countryLoadMore = document.querySelector('.js-load-more')
     
     if ($countryLoadMore) {
-        const $loader = document.querySelector('.region__scroll-content__tiles .loader-container')
-        const $fullLoader = document.querySelector('.region__scroll-content__tiles .full-loader')
+        const $loader = document.querySelector('.region .loader-container')
+        const $fullLoader = document.querySelector('.region .full-loader')
+
+        const $tilesContainer = document.querySelector('.region__scroll-content__tiles')
+
         $countryLoadMore.addEventListener('click', () => {
             $loader.style.display = 'block'
             $countryLoadMore.style.display = 'none';
@@ -21,7 +24,7 @@ function load_more () {
                 .then(data => {
                     selectedSpecies = JSON.parse(data.split('===SEPARATOR===')[1])
                     const toRender = data.split('===SEPARATOR===')[0]
-                    $fullLoader.insertAdjacentHTML('beforebegin', toRender)
+                    $tilesContainer.insertAdjacentHTML('beforeend', toRender)
                     $loader.style.display = 'none';
                     if (selectedSpecies.oldArray.count > 0) {
                         $countryLoadMore.style.display = 'block';

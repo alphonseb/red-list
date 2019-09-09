@@ -4,6 +4,18 @@
             <div class="bar">
             </div>
         </button>
+
+        <div class="full-menu">
+            <nav>
+                <ul>
+                    <li><a href="<?= URL ?>">Home</a></li>
+                    <li><a href="<?= URL ?>map">Map</a></li>
+                    <li><a href="<?= URL ?>about">About</a></li>
+                </ul>
+            </nav>
+            <a class="test-link" href="<?= URL ?>kenya/loxodonta_africana" title="Link with data">Test link with some data</a>
+
+        </div>
         
     </div>
     <div class="region__sidebar__content">
@@ -21,16 +33,5 @@
                 <p>Back to the map !</p>
             </a>
         </div>
-    </div>
-    <div class="full-menu">
-        <nav>
-            <ul>
-                <li><a href="<?= URL ?>">Home</a></li>
-                <li><a href="<?= URL ?>map">Map</a></li>
-                <li><a href="<?= URL ?>about">About</a></li>
-            </ul>
-        </nav>
-        <a class="test-link" href="<?= URL ?>kenya/loxodonta_africana" title="Link with data">Test link with some data</a>
-
     </div>
 </div>

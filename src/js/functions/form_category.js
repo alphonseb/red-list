@@ -7,7 +7,7 @@ function form_category () {
     const $tilesContainer = document.querySelector('.region__scroll-content__tiles')
 
     const $countryLoadMore = document.querySelector('.js-load-more')
-    const $loader = document.querySelector('.region__scroll-content__tiles .loader-container')
+    const $loader = document.querySelector('.region .loader-container')
 
     const $emptyPrompt = document.querySelector('.empty-cat')
     

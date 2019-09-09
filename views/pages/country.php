@@ -95,18 +95,18 @@ $species = $selectedSpeciesArray['newArray'];
                     </div>
                 </a>
             <?php endforeach; ?>
-            <p class="empty-cat <?= count($species) != 0 ? 'hidden' : '' ?>">No species found !</p>
-            <?php if ($selectedSpeciesArray['oldArray']['count'] > 0): ?>
-                <div class="full-loader">
-                    <div class="loader-container">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
-                            <circle cx="25" cy="25" r="20" />
-                        </svg>
-                    </div>
-                    <button class="js-load-more load-more">Load more</button>
-                </div>
-            <?php endif; ?>
         </div>
+        <p class="empty-cat <?= count($species) != 0 ? 'hidden' : '' ?>">No species found !</p>
+        <?php if ($selectedSpeciesArray['oldArray']['count'] > 0): ?>
+            <div class="full-loader">
+                <div class="loader-container">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
+                        <circle cx="25" cy="25" r="20" />
+                    </svg>
+                </div>
+                <button class="js-load-more load-more">Load more</button>
+            </div>
+        <?php endif; ?>
     </div>
 </div>
 <script>

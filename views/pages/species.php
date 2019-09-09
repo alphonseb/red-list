@@ -84,6 +84,11 @@
             <div class="img-container">
                 <img src="<?= $speciesInfosArray['general'][0]->url ?>" alt="">
             </div>
+            <div class="title">
+                <h1><?= !empty($common_name) ? $common_name : $scientific_name  ?></h1>
+                <a href="<?= URL.$country ?>" title="Back to country" class="js-go-back">Back</a>
+            </div>
+            <p class="italic scientific"><?= !empty($common_name) ? $scientific_name : '' ?></p>
             <div class="description">
                 <div class="categories">
                     <?php foreach($categories as $_category): ?>
