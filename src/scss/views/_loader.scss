@@ -15,7 +15,8 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 50;
+    z-index: 100;
+    padding: 2rem;
     
     img {
         width:138px;
@@ -26,6 +27,7 @@
         font-weight: 300;
         font-size: 24px;
         color: white;
+        text-align: center;
     }
     
     /* loader */
