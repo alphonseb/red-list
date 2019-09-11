@@ -10,7 +10,7 @@ $species = $selectedSpeciesArray['newArray'];
     const countryCode = <?= json_encode($countryArray->country) ?>;
 </script>
 
-<div class="region">
+<div class="region js-async-container">
     <?php include './views/partials/sidebar.php' ?>
     <div class="region__scroll-content">
         <div class="region__scroll-content__stats">
@@ -22,6 +22,9 @@ $species = $selectedSpeciesArray['newArray'];
                 </div>
                 <div class="donut-chart">
                     <h3>Percentage by category of endangerment</h3>
+                    <div class="donut-chart__content js-donut">
+                        <div class="legend js-legend"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -61,7 +64,7 @@ $species = $selectedSpeciesArray['newArray'];
         </div>
         <div class="region__scroll-content__tiles">
             <?php foreach($species as $_single_species): ?>
-                <a href="<?= URL.explode('/',$_GET['q'])[0].'/'.strtolower(str_replace(' ', '_', $_single_species['scientific_name'])) ?>" title="<?= $_single_species['scientific_name'] ?>">    
+                <a class="async" href="<?= URL.explode('/',$_GET['q'])[0].'/'.strtolower(str_replace(' ', '_', $_single_species['scientific_name'])) ?>" title="<?= $_single_species['scientific_name'] ?>">    
                     <div class="region__scroll-content__tiles__single-tile">
                         <div class="img-container">
                             <img src="<?= $_single_species['url'] ?>" alt="<?= $_single_species['main_common_name'] ?>">
@@ -109,9 +112,8 @@ $species = $selectedSpeciesArray['newArray'];
         <?php endif; ?>
     </div>
 </div>
-<script>
+<script class="load-with">
     const count = <?= json_encode($categoryCountArray['category']) ?>;
     let selectedSpecies = <?= json_encode($selectedSpeciesArray) ?>;
 </script>
-<script src="https://d3js.org/d3.v5.min.js"></script>
 <?php include './views/partials/footer.php'; ?>

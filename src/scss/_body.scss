@@ -27,5 +27,33 @@ body{
         font-weight: 300;
         line-height: 1.5;
     }
+
+    .async-loader {
+        position: fixed;
+        z-index: 20;
+        top: 0;
+        left: 30%;
+        width: 70%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(255, 255, 255, 0.5);
+        display: none;
+
+        @media screen and (max-width: 1065px) {
+            left: 320px;
+        }
+
+        @media screen and (max-width: 800px) {
+            left: 0;
+            top: 10vh;
+            width: 100%;
+        }
+
+        svg {
+            width: 100px;
+        }
+    }
 }
 

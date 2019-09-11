@@ -23,7 +23,7 @@ function loading () {
     }
 
     document.addEventListener('click', (e) => {
-        if (e.target.closest('a')) {
+        if (e.target.closest('a:not(.async)')) {
             $loader.style.display = 'flex'
         }
     })

@@ -5,6 +5,11 @@
             </div>
         </button>
 
+        <div class="sidebar-title">
+            <img src="<?= URL ?>dist/img/paw_white.png" alt="logo">
+            <a href="<?= URL ?>" title="Home">RED LIST</a>
+        </div>
+
         <div class="full-menu">
             <nav>
                 <ul>

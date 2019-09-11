@@ -9,11 +9,7 @@ include('./functions.php');
  * Routing
  */
 
-<<<<<<< HEAD
-define('URL','http://localhost:8888/si_back/');
-=======
-define('URL','http://localhost/si_back/');
->>>>>>> f7409a507229db8d50e381b89234534e9e7a5e01
+define('URL','http://localhost:8888/red-list/');
 define('token', '9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee');
 
 //Get q param

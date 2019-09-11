@@ -45,13 +45,13 @@
 <script>
     const countryCode = <?= json_encode($_GET['country']) ?>;
 </script>
-<div class="species">
+<div class="species js-async-container">
     <?php include './views/partials/sidebar.php'; ?>
     <div class="species__scroll-content">
         <div class="species__scroll-content__main">
             <div class="title">
                 <h1><?= !empty($common_name) ? $common_name : $scientific_name  ?></h1>
-                <a href="<?= URL.$country ?>" title="Back to country" class="js-go-back">Back</a>
+                <a href="<?= URL.str_replace(" ", "_", $country) ?>" title="Back to country" class="js-go-back async">Back</a>
             </div>
             <p class="italic scientific"><?= !empty($common_name) ? $scientific_name : '' ?></p>
             <?php if(empty($threats) && empty($measures)): ?>
@@ -86,7 +86,7 @@
             </div>
             <div class="title">
                 <h1><?= !empty($common_name) ? $common_name : $scientific_name  ?></h1>
-                <a href="<?= URL.$country ?>" title="Back to country" class="js-go-back">Back</a>
+                <a href="<?= URL.str_replace(" ", "_", $country) ?>" title="Back to country" class="js-go-back async">Back</a>
             </div>
             <p class="italic scientific"><?= !empty($common_name) ? $scientific_name : '' ?></p>
             <div class="description">

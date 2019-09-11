@@ -1,5 +1,5 @@
 <?php foreach($selectedSpeciesArray['newArray'] as $_single_species): ?>
-    <a href="<?= URL.explode('/',$_GET['q'])[0].'/'.strtolower(str_replace(' ', '_', $_single_species['scientific_name'])) ?>" title="<?= $_single_species['scientific_name'] ?>">    
+    <a class="async" href="<?= URL.explode('/',$_GET['q'])[0].'/'.strtolower(str_replace(' ', '_', $_single_species['scientific_name'])) ?>" title="<?= $_single_species['scientific_name'] ?>">    
         <div class="region__scroll-content__tiles__single-tile">
             <div class="img-container">
                 <img src="<?= $_single_species['url'] ?>" alt="<?= $_single_species['main_common_name'] ?>">

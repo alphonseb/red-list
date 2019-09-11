@@ -10,6 +10,31 @@
         padding: 20px;
         display: flex;
         align-items: center;
+        position: relative;
+
+        .sidebar-title {
+            display: flex;
+            align-items: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+
+            img{
+                height: 5vh;
+                margin-right: 15px;
+            }
+
+            a{
+                font-family: $main-font;
+                color: $white;
+                font-weight: bold;
+                text-decoration: none;
+                font-size: 2.8rem;
+                margin-top: 5px;
+            }
+        }
+
         button.menu{
             outline: none;
             padding: 0;
