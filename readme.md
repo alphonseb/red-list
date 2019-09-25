@@ -18,4 +18,4 @@
 - SCSS
 
 ## URL
-Visit the project on http://samuelbelolo.com !
+Visit the project on https://red-list.alphonsebouy.fr !
